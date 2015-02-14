@@ -28,7 +28,7 @@ var newDragon = function(event){
 	
 	//add image
 	var dragonImage = document.createElement("img");
-	dragonImage.src = d_breed + "_body.png";	
+	dragonImage.src = "images/" + d_breed + "_body.png";	
 	dragonImage.height = d_length; 
 	dragon.appendChild(dragonImage);
 	dragonImage.addEventListener('mousedown', move);
@@ -55,7 +55,7 @@ var newDragon = function(event){
 	wings.style.paddingTop = d_length / 8;
 	
 	var wingImage = document.createElement("img");
-	wingImage.src = d_breed + "_wings.png";	
+	wingImage.src = "images/" + d_breed + "_wings.png";	
 	wingImage.width = d_wingspan; 
 	wings.appendChild(wingImage);	
 	dragon.appendChild(wings);
@@ -92,9 +92,10 @@ var move = function(event){
 	
 
 	this.onmouseup = function(event){
-		
 		//check if its on the delete box
-		
+		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){			
+			this.parentNode.remove();
+		}
 		
 		//clear the mousemove function until we trigger move again	
 		document.onmousemove = null;
@@ -102,4 +103,17 @@ var move = function(event){
 	
 }//end move
 
+
+//show/hide create dragon menu
+var toggleForm = function(event){
+	var form = document.getElementById("form");
+	if(form.style.display === "block"){
+		form.style.display = "none";
+
+	}
+	else{
+		form.style.display = "block";
+
+	}
+}
 

@@ -1,0 +1,67 @@
+<html><head>
+	<title>Sizes</title>
+	
+	<style>
+		.dragonBody{
+			width : 50px;
+			height : 50px;
+			position: absolute;
+			overflow: visible;
+			margin: 0 auto;
+			}
+			
+		.wings{
+			position: absolute;
+			text-align: center;
+			margin: 0 auto;
+			}
+		.label{
+			position:absolute;
+		}
+		
+		#form{
+			
+			
+		}
+		#remove{
+			position:fixed;
+			bottom:0;
+			left:0;
+			width:50px;
+			height:50px;
+			background: #00ee00;
+		
+		}
+			
+	</style>
+	<script src = "sizes.js"></script>
+</head>
+	
+<body>
+		<div id="displayBox"></div>		
+		<div id="form">
+			Add a new dregen!
+			<p>Length: <input type="number" id="length"/> </p>
+			<p>Wingspan: <input type="number" id="wingspan"/> </p>
+			<p>Breed: <select id="breed">
+					<option></option>
+					<option value="coatl">Coatl</option>
+					<option value="mirror">Mirror</option>
+					<option value="fae">Fae</option>
+					<option value="spiral">Spiral</option>
+					 </select>
+				</p>
+			<p>Name: <input type="text" id="name" /></p>
+			
+			
+		
+		<button onclick="newDragon()">Make me</button>
+		</div>
+		<div id="remove">delete a dregen</div>
+			
+</body>
+	
+
+	
+<html>
+

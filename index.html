@@ -33,15 +33,19 @@
 				-1px -1px 0 #000,  
 				1px -1px 0 #000,
 				-1px 1px 0 #000,
-				1px 1px 0 #000;;
+				1px 1px 0 #000;
 		}
 		
-		#form{
+		
+		#form, #notes{
 			font-family:arial;
 			font-size:10pt;
 			border:1px solid #000000;
 			width: 20em;
-			
+			background: #ffffff;
+		}
+		#notes{
+			display:none;
 		}
 		#remove{
 			font-size:100px;
@@ -61,7 +65,7 @@
 	
 <body>
 		<div id="displayBox"></div>	
-		<button onclick="toggleForm()">Show/Hide Menu</button>
+		<button onclick="toggleForm()">Show/Hide Menu</button><button onclick="toggleNotes()">Show/Hide Notes</button>
 		<div id="form">
 			<h2>Add a Dragon!</h2>
 			<p>Length: <input type="number" id="length"/> </p>
@@ -96,6 +100,23 @@
 		</p>
 
 		</div>
+		
+		<div id="notes">
+			<p>Size comparison v 1.0. To use, simply input your dragon's information (name is optional) and click "add dragon." Dragons can be clicked and dragged around the screen. To remove a dragon, drag it over the X in the bottom left-hand corner.</p>
+			<p>Please contact me <a href='http://flightrising.com/main.php?p=lair&tab=userpage&id=34420'>on Flight Rising</a> or through email (apocritas at gmail) with questions, concerns, or bug reports.</p>
+			<p>If you experience an issue, please take a screenshot including the <a href="http://wickedlysmart.com/hfjsconsole/">Console Log</a> and email it to me along with an explanation of the issue. </p>
+			<p>Planned changes for next update: <ul>
+			<li>Bug Fix: Wings are sometimes positioned too high or too low. 
+			<li>Bug Fix: What's even up with Skydancer wings? Redraw them to look less absurdly tiny.
+			<li>Bug Fix: Dragons remain attached to cursor (I can't replicate this error, additional information requested)
+			<li>Option to rotate dragons 
+			<li>Option to zoom in/out
+			</ul></p>
+			
+		
+		<p><small> Not affiliated with or endorsed by Flight Rising. all characters (c) Stormlight Workshop.</small></p>
+		</div>
+		
 		<div id="remove">X</div>
 			
 			

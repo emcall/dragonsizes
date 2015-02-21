@@ -7,8 +7,14 @@ var newDragon = function(event){
 	var d_wingspan = document.getElementById("wingspan").value;
 	var d_name = document.getElementById("name").value;
 	
+	console.log("Creating dragon. Breed: +" + d_breed + ", Length: " + d_length + ", Width:" + d_wingspan + ", Name:" + d_name);
+	
+	d_length = d_length * 50;
+	d_wingspan = d_wingspan * 50;
+	
 	//make sure all values are filled (name is optional)
 	if(!d_length || !d_breed || !d_wingspan){
+		console.log("Dragon creation failed: One or more fields left blank");
 		return;
 	}
 	
@@ -85,7 +91,9 @@ var newDragon = function(event){
 //click and drag a dragon on the screen
 var move = function(event){
 	var selection = this;
-	document.onmousemove = function(event){
+	console.log("Dragon clicked on. Initial position:" + event.pageX + "," + event.pageY);
+	
+	document.onmousemove = function(event){	
 		//change the top and left vals of the div to match
 		selection.parentNode.style.top = event.pageY-(selection.height/3);
 		selection.parentNode.style.left = event.pageX-(selection.width/2);
@@ -94,8 +102,10 @@ var move = function(event){
 	
 
 	this.onmouseup = function(event){
+		console.log("Mouse button lifted. Current position:" + event.pageX + "," + event.pageY);
 		//check if its on the delete box
-		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){			
+		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){
+			console.log("Dragon removed");
 			this.parentNode.remove();
 		}
 		
@@ -110,6 +120,8 @@ var move = function(event){
 //if the wing image is clicked on, move needs to function a little differently
 //We need to move the dragon div (the parent(dragon) of the parent(wing))
 var moveWing = function(event){
+	
+	console.log("Dragon wing clicked on. Initial position:" + event.pageX + "," + event.pageY);
 	var selection = this;
 	var dragonbody = this.parentNode.parentNode;
 	document.onmousemove = function(event){
@@ -119,9 +131,11 @@ var moveWing = function(event){
 	}//end document mousemove
 	
 	this.onmouseup = function(event){
+		console.log("Mouse button lifted. Current position:" + event.pageX + "," + event.pageY);
 		//check if its on the delete box
-		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){			
-			this.parentNode.remove();
+		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){	
+			console.log("Dragon removed.");
+			this.parentNode.parentNode.remove();
 		}	
 		//clear the mousemove function until we trigger move again	
 		document.onmousemove = null;
@@ -135,6 +149,7 @@ var changeBG = function(event){
 	if(color[0] != "#")
 		color = "#" + color;	
 	document.body.style.background = color;	
+	console.log("Background color changed to " + color);
 }
 
 
@@ -146,11 +161,25 @@ var toggleForm = function(event){
 	var form = document.getElementById("form");
 	if(form.style.display === "block"){
 		form.style.display = "none";
-
+		console.log("form hidden");
 	}
 	else{
 		form.style.display = "block";
-
+		document.getElementById("notes").style.display = "none";
+		console.log("Form displayed");
 	}
 }
 
+//show/hide create dragon menu
+var toggleNotes = function(event){
+	var notes = document.getElementById("notes");
+	if(notes.style.display === "block"){
+		notes.style.display = "none";
+		console.log("notes hidden");
+	}
+	else{
+		notes.style.display = "block";
+		document.getElementById("form").style.display = "none";
+		console.log("notes displayed");
+	}
+}

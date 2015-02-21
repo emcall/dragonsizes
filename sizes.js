@@ -42,7 +42,6 @@ var newDragon = function(event){
 	//position the wing to center
 	
 	wings.style.left = -d_wingspan/2 + d_length/6;
-	//wings.style.zIndex = "-1";
 	wings.style.top = 0;
 	
 	//this pushes the wings down the shoulders
@@ -56,12 +55,13 @@ var newDragon = function(event){
 	wings.appendChild(wingImage);	
 	dragon.appendChild(wings);
 	
+
+	//this adds the text
 	
-	//add textxtxt
 	var label = document.createElement("p");
 	label.textContent = d_name;
 	label.className = "label";
-	label.style.top = d_length/6;
+	label.style.top = d_length/4;
 	label.style.width = d_wingspan;
 	label.style.zIndex= 2;
 	
@@ -102,33 +102,37 @@ var move = function(event){
 	
 }//end move
 
-//okay maybe check if this is wing or body
-//blegh maybe i should just redo the wing part entirely
 
+
+//if the wing image is clicked on, move needs to function a little differently
+//We need to move the dragon div (the parent(dragon) of the parent(wing))
 var moveWing = function(event){
 	var selection = this;
-	var body = this.parentNode.parentNode;
-	console.log("hup");
+	var dragonbody = this.parentNode.parentNode;
 	document.onmousemove = function(event){
-		//change the top and left vals of the div to match
-		//YO FIX DIS
-		selection.parentNode.parentNode.style.top = event.pageY;
-		selection.parentNode.parentNode.style.left = event.pageX;
+		dragonbody.style.top = event.pageY-selection.width/2;
+		dragonbody.style.left = event.pageX-selection.height/2;
 		
 	}//end document mousemove
 	
-
 	this.onmouseup = function(event){
 		//check if its on the delete box
 		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){			
 			this.parentNode.remove();
-		}
-		
+		}	
 		//clear the mousemove function until we trigger move again	
 		document.onmousemove = null;
 	}//end div mouseup
 	
-}//end move
+}//end moveWing
+
+
+var changeBG = function(event){
+	var color = document.getElementById("color").value;
+	if(color[0] != "#")
+		color = "#" + color;	
+	document.body.style.background = color;	
+}
 
 
 

@@ -68,6 +68,9 @@ var newDragon = function(event){
 	wings.appendChild(label);
 	
 	wingImage.addEventListener('mousedown', moveWing);
+	label.addEventListener('mousedown', moveWing);
+	
+	
 	
 	dragon.appendChild(wings);
 	

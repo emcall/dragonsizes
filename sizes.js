@@ -1,4 +1,11 @@
 
+var setup = function(){
+	console.log("setup");
+var canvas = document.getElementById("canvas");
+canvas.addEventListener('mouseup', drop);
+}
+
+
 //create new dragon
 var newDragon = function(event){
 	//getting the input values
@@ -9,14 +16,18 @@ var newDragon = function(event){
 	
 	console.log("Creating dragon. Breed: +" + d_breed + ", Length: " + d_length + ", Width:" + d_wingspan + ", Name:" + d_name);
 	
-	d_length = d_length * 50;
-	d_wingspan = d_wingspan * 50;
-	
+		
 	//make sure all values are filled (name is optional)
 	if(!d_length || !d_breed || !d_wingspan){
+		alert("Please fill in length, width, and breed!");
 		console.log("Dragon creation failed: One or more fields left blank");
 		return;
 	}
+	
+	//increase the size of everything so that it reflects the actual pixel size that will display
+	d_length = d_length * 50;
+	d_wingspan = d_wingspan * 50;
+
 	
 	//clear the form
 	document.getElementById("breed").value = "";
@@ -39,20 +50,30 @@ var newDragon = function(event){
 	dragonImage.height = d_length; 
 	dragonImage.zIndex = 1;
 	dragon.appendChild(dragonImage);
-	dragonImage.addEventListener('mousedown', move);
 	
+	//event listener
+	dragonImage.addEventListener('mousedown', move);
+	dragonImage.addEventListener('mouseup', dropBody);
 	
 	//wing div
 	var wings = document.createElement('div');
 	wings.className = "wings";
-	//position the wing to center
+	//position the wing to center. d-length is taking into account how big the dragon image is (they're approximately 1/6th the width as the length)
+	//bogsneaks are thicker so they only get 1/5th
 	
-	wings.style.left = -d_wingspan/2 + d_length/6;
-	wings.style.top = 0;
+	if(d_breed !="bogsneak"){
+		wings.style.left = -d_wingspan/2 + d_length/6;
+	}
 	
-	//this pushes the wings down the shoulders
-	//i need a better calculation - have to determine the shoulder location
-	wings.style.paddingTop = d_length / 8;
+	else {
+		wings.style.left = -d_wingspan/2 + d_length/5;
+	}
+	//this pushes the wings down to hit the shoulders
+	//i think i need to take into account the size of the wings compared to the body size
+	//the problem is different breeds have different shoulder locations
+	
+	wings.style.top = d_length/8;
+	
 	
 	var wingImage = document.createElement("img");
 	wingImage.src = "images/" + d_breed + "_wings.png";	
@@ -73,9 +94,12 @@ var newDragon = function(event){
 	
 	wings.appendChild(label);
 	
+
+//add the event listener
 	wingImage.addEventListener('mousedown', moveWing);
 	label.addEventListener('mousedown', moveWing);
-	
+	wingImage.addEventListener('mouseup', dropWing);
+	label.addEventListener('mouseup', dropWing);	
 	
 	
 	dragon.appendChild(wings);
@@ -99,7 +123,7 @@ var move = function(event){
 		selection.parentNode.style.left = event.pageX-(selection.width/2);
 		
 	}//end document mousemove
-	
+	/*
 
 	this.onmouseup = function(event){
 		console.log("Mouse button lifted. Current position:" + event.pageX + "," + event.pageY);
@@ -112,7 +136,7 @@ var move = function(event){
 		//clear the mousemove function until we trigger move again	
 		document.onmousemove = null;
 	}//end div mouseup
-	
+	*/
 }//end move
 
 
@@ -130,6 +154,7 @@ var moveWing = function(event){
 		
 	}//end document mousemove
 	
+/*	
 	this.onmouseup = function(event){
 		console.log("Mouse button lifted. Current position:" + event.pageX + "," + event.pageY);
 		//check if its on the delete box
@@ -140,8 +165,41 @@ var moveWing = function(event){
 		//clear the mousemove function until we trigger move again	
 		document.onmousemove = null;
 	}//end div mouseup
-	
+	*/
 }//end moveWing
+
+//drop the image
+var dropBody = function(event){
+			console.log("Mouse button lifted. Current position:" + event.pageX + "," + event.pageY);
+		//check if its on the delete box
+		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){
+			console.log("Dragon removed");
+			this.parentNode.remove();
+		}
+		
+		//clear the mousemove function until we trigger move again	
+		document.onmousemove = null;
+}
+
+var dropWing = function(event){
+	
+		console.log("Mouse button lifted. Current position:" + event.pageX + "," + event.pageY);
+		//check if its on the delete box
+		if(event.pageY >= window.innerHeight-100 && event.pageX <= 100){	
+			console.log("Dragon removed.");
+			this.parentNode.parentNode.remove();
+		}	
+		//clear the mousemove function until we trigger move again	
+		document.onmousemove = null;
+	
+}
+
+var drop = function(event){
+	console.log("triggered drop");
+//When the mouse is lifted this needs to execute to make sure the dragon is put down
+		document.onmousemove = null;
+}
+
 
 
 var changeBG = function(event){
@@ -150,9 +208,7 @@ var changeBG = function(event){
 		color = "#" + color;	
 	document.body.style.background = color;	
 	console.log("Background color changed to " + color);
-}
-
-
+} //end changeBG
 
 
 

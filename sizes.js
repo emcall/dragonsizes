@@ -1,8 +1,8 @@
 
 var setup = function(){
 	console.log("setup");
-var canvas = document.getElementById("canvas");
-canvas.addEventListener('mouseup', drop);
+	var canvas = document.getElementById("canvas");
+	canvas.addEventListener('mouseup', drop);
 }
 
 
@@ -58,6 +58,8 @@ var newDragon = function(event){
 	//wing div
 	var wings = document.createElement('div');
 	wings.className = "wings";
+	
+	
 	//position the wing to center. d-length is taking into account how big the dragon image is (they're approximately 1/6th the width as the length)
 	//bogsneaks are thicker so they only get 1/5th
 	
@@ -66,8 +68,9 @@ var newDragon = function(event){
 	}
 	
 	else {
-		wings.style.left = -d_wingspan/2 + d_length/5;
+		wings.style.left = -d_wingspan/2 + d_length/11;
 	}
+
 	//this pushes the wings down to hit the shoulders
 	//i think i need to take into account the size of the wings compared to the body size
 	//the problem is different breeds have different shoulder locations

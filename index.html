@@ -37,15 +37,18 @@
 		}
 		
 		
-		#form, #notes{
+		#form, #notes, #faq{
 			font-family:arial;
 			font-size:10pt;
 			border:1px solid #000000;
 			width: 20em;
 			background: #ffffff;
 		}
-		#notes{
+		#notes, #faq{
 			display:none;
+		}
+		#faq{
+			width:40em;
 		}
 		#remove{
 			font-size:100px;
@@ -59,17 +62,14 @@
 		
 		}
 			
-		.strike{
-		color:#cccccc;
-		}
 			
 	</style>
-	<script src = "sizes.js"></script>
+	<script src = "javascripts/sizes.js"></script>
 </head>
 	
 <body>
 		<div id="displayBox"></div>	
-		<button onclick="toggleForm()">Show/Hide Menu</button><button onclick="toggleNotes()">Show/Hide Notes</button>
+		<button onclick="toggleForm()">Show/Hide Menu</button><button onclick="toggleNotes()">Show/Hide Notes</button><button onclick="toggleFAQ()">Show/Hide FAQ</button>
 		<div id="form">
 			<h2>Add a Dragon!</h2>
 			<p>Length: <input type="number" id="length"/> </p>
@@ -90,7 +90,10 @@
 					<option value="imperial">Imperial</option>
 					<option value="tundra">Tundra</option>
 					<option value="guardian">Guardian</option>
-					<option value="bogsneak" class="strike">Bogsneak*</option>
+					<option value="bogsneak">Bogsneak</option>
+					<option value="gaoler" >Gaoler</option>
+					<option value="banescale">Banescale</option>
+					<option value="veilspun" >Veilspun</option>
 					 </select>
 				</p>
 			<p>Name: <input type="text" id="name" /></p>
@@ -101,8 +104,12 @@
 
 		<p>
 			<h2>Background Color</h2>
-			<input type="text" id="color" />
+			<input type="color" id="color" value="#ffffff"/>
 			<button onclick="changeBG()">Change</button>
+
+
+			
+			
 		</p>
 
 		</div>
@@ -110,12 +117,28 @@
 		<div id="notes">
 			<p>Size comparison v 1.1. To use, simply input your dragon's information (name is optional) and click "add dragon." Dragons can be clicked and dragged around the screen. To remove a dragon, drag it over the X in the bottom left-hand corner.</p>
 			<p>Please contact me <a href='http://flightrising.com/main.php?p=lair&tab=userpage&id=34420'>on Flight Rising</a> or through email (apocritas at gmail) with questions, concerns, or bug reports.</p>
-			<p>If you experience an issue, please take a screenshot including the <a href="http://wickedlysmart.com/hfjsconsole/">Console Log</a> and email it to me along with an explanation of the issue. </p>
+			<p>If you experience an issue not mentioned in the FAQ, please take a screenshot including the <a href="http://wickedlysmart.com/hfjsconsole/">Console Log</a> and email it to me along with an explanation of the issue. </p>
 
-			<p><b>*NOTE </b>Bogsneaks do not work properly. The wings are misplaced. I am aware of this! I included them anyway in case you want to make some with no wings.</p>
-			
 		
-		<p><small> Not affiliated with or endorsed by Flight Rising. all characters (c) Stormlight Workshop.</small></p>
+		<p><small> Not affiliated with or endorsed by Flight Rising. All characters (c) Stormlight Workshop.</small></p>
+		</div>
+
+		<div id="faq">
+			<p><b>FAQ</b></p>
+			<p><b>Why won't the form let me add commas for the decimals?</b></p>
+			<p>In English decimal places are indicated by periods, not commas. So 1.1 instead of 1,1. </p>
+			<p><b>Sometimes a dragon sticks to my cursor, is this going to be fixed?</b></p>
+			<p>This glitch is the bane of my existence. Sometimes it doesn't catch when you release the mouse button and I don't know why. If <i>you</i> can figure it out please tell me the solution, I will give you dragon money as a reward.</p>
+			<p><b>The wings on one of my dragons are misplaced. They're on the butt/neck. Why?</b></p>
+			<p>Congrats on having a dragon with silly proportions! When FR creates a new dragon it appears to determine length and wingspan separately, so you can have a dragon that's unusally large with unusually small wings, or vice versa. Wing placement is based roughly off of average proportions, so if the wings are proportionally very small they get pushed up to the neck, and very large ones get pushed to the butt. Not much to be done about it. </p>
+			<p><b>Is there a way to change the color of a dragon?</b></p>
+			<p>The way it's set up now, no. I have an idea to make this possible later but it's backburner.</p>
+			<p><b>How do I zoom in/out?</b></p>
+			<p>Hold Ctrl/Cmd and hit = to zoom in, - to zoom out. </p>
+			<p><b>A new dragon released, when can I expect it to be added?</b></p>
+			<p>Uhhh. Whenever. I notoriously take months to add new dragons because I am terrible at time management.</p>
+			<p><b>Can I use this in my own fanart?</b></p>
+			<p>Yeah sure. If you're going to be incorporating the actual images (like doing a paintover) then please credit me. I also like seeing what people do! Send it to me!!! @akrona for FR and tumblr, for twitter @apocritae.</p>
 		</div>
 		
 		<div id="remove">X</div>
